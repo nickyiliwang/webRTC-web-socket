@@ -3,4 +3,4 @@
 2. Convert it into serverless with PeerJS
 
 Credit:
-1. [Tutorial](https://www.youtube.com/watch?v=DvlyzDZDEq4)
+1. [Tutorial#1 outdated](https://www.youtube.com/watch?v=DvlyzDZDEq4)

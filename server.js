@@ -16,4 +16,14 @@ app.get("/:room", (req, res) => {
   res.render("room", { roomId: req.params.room });
 });
 
+// web socket routes
+io.on("connection", (socket) => {
+  // event from script.js
+  socket.on("join-room", (roomId, userId) => {
+    socket.join(roomId);
+    // emitting an user-connected event for script.js
+    socket.to(roomId).emit("user-connected", userId);
+  });
+});
+
 server.listen(3000);
