@@ -1,18 +1,42 @@
 {
   "Table": {
-    "TableName": "posts",
-    "keySchema": [
-      {
-        "AttributeName": "id",
-        "KeyType": "HASH"
-      }
-    ],
+    "TableName": "webRTC",
     "AttributeDefinitions": [
       {
         "AttributeName": "id",
         "AttributeType": "S"
+      },
+      {
+        "AttributeName": "roomId",
+        "AttributeType": "S"
       }
     ],
+    "KeySchema": [
+      {
+        "AttributeName": "id",
+        "KeyType": "HASH"
+      },
+      {
+        "AttributeName": "roomId",
+        "KeyType": "RANGE"
+      }
+    ],
+    "GlobalSecondaryIndexes": {
+      "IndexName": "RoomIdIndex",
+      "KeySchema": [
+        {
+          "AttributeName": "roomId",
+          "KeyType": "HASH"
+        },
+        {
+          "AttributeName": "id",
+          "KeyType": "RANGE"
+        }
+      ],
+      "Projection": {
+        "ProjectionType": "ALL"
+      }
+    },
     "ProvisionedThroughput": {
       "ReadCapacityUnits": 1,
       "WriteCapacityUnits": 1

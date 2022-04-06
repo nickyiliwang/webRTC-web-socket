@@ -1,4 +1,5 @@
 const AWS = require("aws-sdk");
+const { v4: uuid } = require("uuid");
 const TABLE_NAME = process.env.TABLE_NAME;
 
 function response(statusCode, message) {
@@ -37,7 +38,21 @@ const sendToOne = async (id, body) => {
   }
 };
 
+// all ids in the room
+const sendToAll = async (items, body) => {
+  console.log("ids", items);
+  const users = items.Items;
+  const shout = users.map(({ id }) => sendToOne(id, body));
+  return Promise.all(shout);
+};
+
+const generateNewRoomId = () => {
+  return uuid();
+};
+
 exports.sendToOne = sendToOne;
+exports.sendToAll = sendToAll;
 exports.response = response;
 exports.db = db;
 exports.TABLE_NAME = TABLE_NAME;
+exports.generateNewRoomId = generateNewRoomId;

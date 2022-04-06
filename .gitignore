@@ -7,3 +7,4 @@ node_modules
 .serverless
 
 # End of https://www.toptal.com/developers/gitignore/api/serverless
+.dynamodb

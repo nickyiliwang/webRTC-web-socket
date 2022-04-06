@@ -56,6 +56,11 @@ functions:
       #simple event definition without extra route property
       - websocket: $default
 
+  roomId:
+    handler: functions/roomId.handler
+    events:
+      - websocket:
+          route: roomId
   add:
     handler: functions/add.handler
     events:
@@ -70,9 +75,22 @@ resources:
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S
+          - AttributeName: roomId
+            AttributeType: S
         KeySchema:
           - AttributeName: id
-            KeyType: HASH
+            KeyType: HASH  
+          - AttributeName: roomId
+            KeyType: RANGE
+        GlobalSecondaryIndexes:
+          - IndexName: RoomIdIndex
+            KeySchema:
+              - AttributeName: roomId
+                KeyType: HASH
+              - AttributeName: id
+                KeyType: RANGE
+            Projection:
+              ProjectionType: 'ALL'
         BillingMode: PAY_PER_REQUEST
         TableName: ${self:provider.environment.TABLE_NAME}
 plugins:
