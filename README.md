@@ -6,6 +6,8 @@ Table setup:
 
 <!-- Simple Version -->
 Routes:
-1. default => scans the db
+1. add => scans the db => shouts
+2. {"action": "shout", "type": "offer", "message": "offer from client"}
+3. {"action": "shout", "type": "answer", "message": "answer from remote"}
 
 <!-- Complex with Rooms -->

@@ -61,11 +61,11 @@ functions:
     events:
       - websocket:
           route: roomId
-  add:
-    handler: functions/add.handler
+  shout:
+    handler: functions/shout.handler
     events:
       - websocket:
-          route: add
+          route: shout
 
 resources:
   Resources:
