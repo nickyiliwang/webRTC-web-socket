@@ -19,9 +19,13 @@
   },
   "homepage": "https://github.com/nickyiliwang/webRTC-web-socket#readme",
   "dependencies": {
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "dotenv": "^16.0.0",
+    "serverless-dotenv-plugin": "^3.12.2",
+    "unique-names-generator": "^4.7.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "serverless-dynamodb-local": "^0.2.40",
+    "serverless-offline": "^8.5.0"
   }
 }

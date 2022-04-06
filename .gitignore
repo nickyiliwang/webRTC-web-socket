@@ -1,1 +1,9 @@
 node_modules
+# Created by https://www.toptal.com/developers/gitignore/api/serverless
+# Edit at https://www.toptal.com/developers/gitignore?templates=serverless
+
+### Serverless ###
+# Ignore build directory
+.serverless
+
+# End of https://www.toptal.com/developers/gitignore/api/serverless

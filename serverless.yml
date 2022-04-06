@@ -1,0 +1,92 @@
+service: webRTC
+provider:
+  name: aws
+  profile: iamadmin
+  runtime: nodejs14.x
+  region: us-east-1
+  stage: ${self:custom.stage}
+  environment:
+    TABLE_NAME: ${self:service}-${opt:stage, self:provider.stage}-table
+    ENDPOINT:
+      Fn::Join:
+        - ''
+        - - Ref: WebsocketsApi
+          - .execute-api.
+          - Ref: AWS::Region
+          - .amazonaws.com/
+          - ${self:custom.stage}
+  websocketsApiName: webRTC-api
+  # custom routes are selected by the value of the action property in the body
+  websocketsApiRouteSelectionExpression: $request.body.action
+  # AWS Managed policy
+  # arn:aws:iam::aws:policy/AmazonAPIGatewayInvokeFullAccess
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:DeleteItem
+            - dynamodb:GetItem
+            - dynamodb:Scan
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:Query
+          Resource:
+            Fn::GetAtt:
+              - WebRTCTable
+              - Arn
+
+functions:
+# Connection
+  connect:
+    handler: functions/connect.handler
+    events:
+      - websocket:
+          route: $connect
+
+  disconnect:
+    handler: functions/disconnect.handler
+    events:
+      - websocket:
+          route: $disconnect
+
+  default:
+    handler: functions/default.handler
+    events:
+      #simple event definition without extra route property
+      - websocket: $default
+
+  add:
+    handler: functions/add.handler
+    events:
+      - websocket:
+          route: add
+
+resources:
+  Resources:
+    WebRTCTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+        TableName: ${self:provider.environment.TABLE_NAME}
+plugins:
+  - serverless-dynamodb-local
+  - serverless-offline
+
+custom:
+  stage: ${opt:stage, 'dev'}
+  dynamodb:
+      stages:
+          - dev
+      start:
+          port: 8000
+          inMemory: true
+          migrate: true
+      migration:
+          dir: offline/migrations
