@@ -32,9 +32,12 @@ provider:
             - dynamodb:UpdateItem
             - dynamodb:Query
           Resource:
-            Fn::GetAtt:
-              - WebRTCTable
-              - Arn
+            - { "Fn::GetAtt": ["WebRTCTable", "Arn" ] }
+            - Fn::Join:
+              - "/"
+              -
+                - { "Fn::GetAtt": ["WebRTCTable", "Arn" ] }
+                - "index/*"
 
 functions:
 # Connection

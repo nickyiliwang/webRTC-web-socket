@@ -14,6 +14,7 @@ How:
 shouting will exclude the sender
 
 <!-- Complex with Rooms -->
+Check for roomId, and let the user be able to generate their own room name
 
 DDB:
 ```
