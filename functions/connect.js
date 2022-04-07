@@ -2,7 +2,9 @@ const { db, TABLE_NAME, generateNewRoomId, response } = require("./common");
 
 exports.handler = async (event, context, cb) => {
   const id = event.requestContext.connectionId;
-  const roomId = generateNewRoomId();
+  // Using static roomId for now
+  const roomId = "Room1";
+
   console.log(id, roomId);
   await db
     .put({

@@ -87,8 +87,6 @@ resources:
             KeySchema:
               - AttributeName: roomId
                 KeyType: HASH
-              - AttributeName: id
-                KeyType: RANGE
             Projection:
               ProjectionType: 'ALL'
         BillingMode: PAY_PER_REQUEST

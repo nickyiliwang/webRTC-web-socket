@@ -27,10 +27,6 @@
         {
           "AttributeName": "roomId",
           "KeyType": "HASH"
-        },
-        {
-          "AttributeName": "id",
-          "KeyType": "RANGE"
         }
       ],
       "Projection": {
