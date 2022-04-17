@@ -5,15 +5,6 @@ exports.handler = async (e, context, cb) => {
   const roomId = "Room1";
   const { type, message } = JSON.parse(e.body);
   const id = e.requestContext.connectionId;
-  // try {
-  //   result = await db
-  //     .scan({
-  //       TableName: TABLE_NAME,
-  //     })
-  //     .promise();
-  // } catch (error) {
-  //   console.error(error);
-  // }
 
   try {
     result = await db

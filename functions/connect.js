@@ -1,4 +1,4 @@
-const { db, TABLE_NAME, generateNewRoomId, response } = require("./common");
+const { db, TABLE_NAME, response } = require("./common");
 
 exports.handler = async (event, context, cb) => {
   const id = event.requestContext.connectionId;
