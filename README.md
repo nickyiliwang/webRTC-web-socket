@@ -1,7 +1,7 @@
 # webRTC-sls-web-socket
 
 TODO:
-1. (Setup docker image in Lambda with the PeerJS image.)[https://code.mendhak.com/lambda-docker-hello-world/]
+1. [Setup docker image in Lambda with the PeerJS image](https://code.mendhak.com/lambda-docker-hello-world/)
 
 Table setup:
 1. roomId partition key <= UUID
